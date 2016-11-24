@@ -38,6 +38,8 @@ log.error "This script does nothing, yet."
 raise "This script does nothing, yet, sorry!"
 ```
 
+![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.14.49.png)
+
 ### Manually defining a log instance
 
 This gem defines `log` unless `log` is already defined. But, of course, you may manually instantiate it:
@@ -71,6 +73,7 @@ require 'fiedl/log'
 shell "whoami"
 ```
 
+![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.15.47.png)
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
