@@ -1,8 +1,7 @@
 # Fiedl::Log
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fiedl/log`. To experiment with that code, run `bin/console` for an interactive prompt.
+Simple colored output helper for ruby scripts.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -22,7 +21,45 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+log.head "Awesome script"
+log.section "Checking dependencies"
+log.info "Checking if all dependencies are met."
+log.success "Ok"
+
+log.section "Checking deprecations"
+log.warning "This does not work much longer ..."
+
+log.section "Checking other stuff"
+log.error "This script does nothing, yet."
+raise "This script does nothing, yet, sorry!"
+```
+
+### Manually defining a log instance
+
+This gem defines `log` unless `log` is already defined. But, of course, you may manually instantiate it:
+
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+$log = Fiedl::Log::Log.new
+```
+
+### Filtering content
+
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+log.filter_out("my_secret_password")
+```
+
+This will filter out any occurance of "my_secret_password" and replace it by "[...]" in the output.
+
 
 ## Development
 
