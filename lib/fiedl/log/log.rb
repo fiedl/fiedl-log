@@ -41,4 +41,21 @@ class Fiedl::Log::Log
     filter_out expression
   end
 
+  # Print commant, execute it and display result.
+  # See also: http://stackoverflow.com/a/10224650/2066546
+  #
+  def shell(command)
+    prompt command
+
+    output = ""
+    r, io = IO.pipe
+    fork do
+      system(command, out: io, err: :out)
+    end
+    io.close
+    r.each_char{|c| print c; output += c}
+
+    return output
+  end
+
 end

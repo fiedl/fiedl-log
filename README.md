@@ -60,6 +60,16 @@ log.filter_out("my_secret_password")
 
 This will filter out any occurance of "my_secret_password" and replace it by "[...]" in the output.
 
+### Shell commands
+
+Print a shell command, execute it and display the result:
+
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+shell "whoami"
+```
 
 ## Development
 

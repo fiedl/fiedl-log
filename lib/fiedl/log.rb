@@ -14,3 +14,9 @@ unless defined? log
     @log ||= Fiedl::Log::Log.new
   end
 end
+
+unless defined? shell
+  def shell(command)
+    log.shell command
+  end
+end
