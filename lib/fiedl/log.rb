@@ -9,4 +9,8 @@ module Fiedl
   end
 end
 
-log = Fiedl::Log::Log.new unless defined? log
+unless defined? log
+  def log
+    @log ||= Fiedl::Log::Log.new
+  end
+end

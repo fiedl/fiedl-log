@@ -1,4 +1,5 @@
 class Fiedl::Log::Log
+
   def head(text)
     info ""
     info "==========================================================".blue
