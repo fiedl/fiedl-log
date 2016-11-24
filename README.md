@@ -2,23 +2,6 @@
 
 Simple colored output helper for ruby scripts.
 
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'fiedl-log'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install fiedl-log
-
 ## Usage
 
 ```ruby
@@ -74,6 +57,23 @@ shell "whoami"
 ```
 
 ![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.15.47.png)
+
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'fiedl-log'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install fiedl-log
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
