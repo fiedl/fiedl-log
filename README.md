@@ -73,6 +73,17 @@ options = {
 log.configuration options
 ```
 
+### Other helpers
+
+Ensure that a certain file is present before continuing: If the file is missing, the error is logged and the script is stopped.
+
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+log.ensure_file "$HOME/.zshrc"
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:

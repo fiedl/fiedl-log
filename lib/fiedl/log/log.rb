@@ -67,4 +67,19 @@ class Fiedl::Log::Log
     return output
   end
 
+  # Ensure that a certain file is present.
+  #
+  def ensure_file(filename, options = {})
+    if File.exists?(filename)
+      log.success "File: #{filename}"
+    else
+      log.error "Something went wrong. File #{filename} is missing."
+      if options[:show_log]
+        log.section "Last log"
+        shell "tail -n 20 #{options[:show_log]}"
+      end
+      raise "File is missing."
+    end
+  end
+
 end
