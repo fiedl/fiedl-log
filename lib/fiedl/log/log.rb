@@ -27,11 +27,14 @@ class Fiedl::Log::Log
     self.write "$ " + text.bold
   end
   def write(text)
+    self.p "#{text}\n"
+  end
+  def p(text)
     @filter_out ||= []
     @filter_out.each do |expression|
       text = text.gsub(expression, "[...]")
     end
-    print text + "\n"
+    print text
   end
   def filter_out(expression)
     @filter_out ||= []
