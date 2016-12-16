@@ -26,6 +26,12 @@ class Fiedl::Log::Log
   def prompt(text)
     self.write "$ " + text.bold
   end
+  def variable(variable, variable_name)
+    self.write "#{variable_name.to_s.blue} = #{variable}"
+  end
+  def configuration(hash)
+    pp hash
+  end
   def write(text)
     self.p "#{text}\n"
   end

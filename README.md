@@ -58,6 +58,21 @@ shell "whoami"
 
 ![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.15.47.png)
 
+### Logging variables
+
+```ruby
+# ~/some_ruby_script.rb
+require 'fiedl/log'
+
+foo = "bar"
+log.variable foo, "foo"
+
+options = {
+  foo: 'bar'
+}
+log.configuration options
+```
+
 ## Installation
 
 Add this line to your application's Gemfile:

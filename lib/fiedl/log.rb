@@ -1,6 +1,7 @@
 require "fiedl/log/version"
 require "fiedl/log/log"
 require "colored"
+require "pp"
 
 STDOUT.sync = true
 
