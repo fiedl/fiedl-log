@@ -59,18 +59,10 @@ class Fiedl::Log::Log
     output = ""
     r, io = IO.pipe
     pid = fork do
-      system(command, out: io, err: :out)
+      system(command, out: io, err: io)
     end
     io.close
     r.each_char{|c| print c; output += c}
-    # r.each_char { |c|
-    #   if c == "\n"
-    #     print "\n   "
-    #   else
-    #     print c
-    #   end
-    #   output += c
-    # }
 
     Process.waitpid pid
     return output
