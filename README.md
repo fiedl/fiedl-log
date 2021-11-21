@@ -21,7 +21,7 @@ log.error "This script does nothing, yet."
 raise "This script does nothing, yet, sorry!"
 ```
 
-![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.14.49.png)
+![screenshot](https://github.com/fiedl/fiedl-log/raw/master/screenshots/Bildschirmfoto%202016-11-24%20um%2018.14.49.png)
 
 ### Manually defining a log instance
 
