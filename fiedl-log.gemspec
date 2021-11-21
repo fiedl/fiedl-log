@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "fiedl-log"
   spec.version       = Fiedl::Log::VERSION
   spec.authors       = ["Sebastian Fiedlschuster"]
-  spec.email         = ["sebastian@fiedlschuster.de"]
+  spec.email         = ["rubygems@fiedlschuster.de"]
 
   spec.summary       = %q{Simple colored output helper for ruby scripts.}
   spec.description   = spec.summary
