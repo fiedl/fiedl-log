@@ -50,6 +50,11 @@ class Fiedl::Log::Log
     filter_out expression
   end
 
+  def raise(text)
+    self.error(text.bold)
+    super(text)
+  end
+
   # Print commant, execute it and display result.
   # See also: http://stackoverflow.com/a/10224650/2066546
   #
