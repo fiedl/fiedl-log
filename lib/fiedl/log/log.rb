@@ -53,8 +53,8 @@ class Fiedl::Log::Log
   # Print commant, execute it and display result.
   # See also: http://stackoverflow.com/a/10224650/2066546
   #
-  def shell(command)
-    prompt command
+  def shell(command, verbose: true)
+    prompt command if verbose
 
     output = ""
     r, io = IO.pipe
@@ -62,10 +62,10 @@ class Fiedl::Log::Log
       system(command, out: io, err: io)
     end
     io.close
-    r.each_char{|c| print c; output += c}
+    r.each_char{|c| (print c if verbose); output += c}
 
     Process.waitpid pid
-    return output
+    return output.strip
   end
 
   # Ensure that a certain file is present.

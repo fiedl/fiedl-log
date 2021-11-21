@@ -17,7 +17,7 @@ unless defined? log
 end
 
 unless defined? shell
-  def shell(command)
-    log.shell command
+  def shell(command, verbose: true)
+    log.shell command, verbose: verbose
   end
 end

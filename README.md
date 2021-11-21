@@ -56,7 +56,15 @@ require 'fiedl/log'
 shell "whoami"
 ```
 
-![screenshot](screenshots/Bildschirmfoto 2016-11-24 um 18.15.47.png)
+![screenshot](https://github.com/fiedl/fiedl-log/raw/master/screenshots/Bildschirmfoto%202016-11-24%20um%2018.15.47.png)
+
+The `shell` command returns both the output of the stdin and the stderr.
+
+To prevent the `shell` command from printing anything, use `verbose: false`:
+
+```ruby
+user = shell "whoami", verbose: false
+```
 
 ### Logging variables
 
