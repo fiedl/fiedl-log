@@ -1,3 +1,5 @@
+require 'open3'
+
 class Fiedl::Log::Log
 
   def head(text)
@@ -55,22 +57,68 @@ class Fiedl::Log::Log
     super(text)
   end
 
-  # Print commant, execute it and display result.
-  # See also: http://stackoverflow.com/a/10224650/2066546
+  # Print command, execute it and display result.
+  # The command may be interactive.
+  #
+  # http://stackoverflow.com/a/10224650/2066546
+  # https://stackoverflow.com/q/20072781/2066546
+  # https://stackoverflow.com/a/29712307/2066546
   #
   def shell(command, verbose: true)
     prompt command if verbose
 
-    output = ""
-    r, io = IO.pipe
-    pid = fork do
-      system(command, out: io, err: io)
-    end
-    io.close
-    r.each_char{|c| (print c if verbose); output += c}
+    result = []
+    @return_stdout = []
+    @return_stderr = []
 
-    Process.waitpid pid
-    return output.strip
+    Open3::popen3(command) do |stdin, stdout, stderr, thread|
+      stdin.sync = true
+      stdout.sync = true
+      stderr.sync = true
+
+      t_out = Thread.new do
+        while l = stdout.getc
+          result << l
+          @return_stdout << l
+          putc l if verbose
+        end
+      end
+
+      t_err = Thread.new do
+        while l = stderr.getc
+          result << l
+          @return_stderr << l
+          putc l if verbose
+        end
+      end
+
+      t_stdin = Thread.new do
+        loop do
+          stdin.putc ARGF.getc
+        end
+      end
+
+      thread.join
+      t_err.join
+      t_out.join
+      t_stdin.kill
+
+      @return_code = thread.value
+    end
+
+    return result.join
+  end
+
+  def return_code
+    @return_code
+  end
+
+  def return_stderr
+    @return_stderr.join
+  end
+
+  def return_stdout
+    @return_stdout.join
   end
 
   # Ensure that a certain file is present.
