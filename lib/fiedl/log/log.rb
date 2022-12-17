@@ -1,4 +1,4 @@
-require 'open3'
+require 'tempfile'
 
 class Fiedl::Log::Log
 
@@ -60,6 +60,7 @@ class Fiedl::Log::Log
   # Print command, execute it and display result.
   # The command may be interactive.
   #
+  # https://stackoverflow.com/a/20187740/2066546
   # http://stackoverflow.com/a/10224650/2066546
   # https://stackoverflow.com/q/20072781/2066546
   # https://stackoverflow.com/a/29712307/2066546
@@ -67,58 +68,18 @@ class Fiedl::Log::Log
   def shell(command, verbose: true)
     prompt command if verbose
 
-    result = []
-    @return_stdout = []
-    @return_stderr = []
+    file = Tempfile.new("fiedl-log")
+    @return_code = system "script -q #{file.path} #{command}"
+    output = file.read
 
-    Open3::popen3(command) do |stdin, stdout, stderr, thread|
-      stdin.sync = true
-      stdout.sync = true
-      stderr.sync = true
-
-      t_out = Thread.new do
-        while l = stdout.getc
-          result << l
-          @return_stdout << l
-          putc l if verbose
-        end
-      end
-
-      t_err = Thread.new do
-        while l = stderr.getc
-          result << l
-          @return_stderr << l
-          putc l if verbose
-        end
-      end
-
-      t_stdin = Thread.new do
-        loop do
-          stdin.putc ARGF.getc
-        end
-      end
-
-      thread.join
-      t_err.join
-      t_out.join
-      t_stdin.kill
-
-      @return_code = thread.value
-    end
-
-    return result.join
+    return output
+  ensure
+    file.close
+    file.unlink
   end
 
   def return_code
     @return_code
-  end
-
-  def return_stderr
-    @return_stderr.join
-  end
-
-  def return_stdout
-    @return_stdout.join
   end
 
   # Ensure that a certain file is present.
